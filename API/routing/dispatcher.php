@@ -73,7 +73,8 @@ class Dispatcher {
     	$controller = new $className;
 
 
-        // TODO: Se non specifico un metodo posso chiamarne uno generico????
+        // TODO: Se non specifico un metodo devo chiamarne uno generico alrimenti eseguo solo il costruttore 
+        //  e non faccio altro
     	if ($route->getAction() !== null) {
             $method = $this->getMethodName($route->getAction());
             if (!method_exists($controller, $method)) {
@@ -85,7 +86,7 @@ class Dispatcher {
         //var_dump($route->getParams());
         //var_dump($route->getAction());
         $controller->setParams($route->getParams());
-        var_dump($controller->getParams());
+        //var_dump($controller->getParams());
         return $controller;
     }
 
