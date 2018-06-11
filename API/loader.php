@@ -43,19 +43,19 @@ class Loader
 		);
 
 		foreach ($routing as &$r) {
-			$r = Loader::ROUTING.$r;
+			$r = self::ROUTING.$r;
 		}
 
 		foreach ($utils as &$u) {
-			$u = Loader::UTILS.$u;
+			$u = self::UTILS.$u;
 		}
 
 		foreach ($security as &$s) {
-			$s = Loader::SECURITY.$s;
+			$s = self::SECURITY.$s;
 		}
 
 		foreach ($database as &$d) {
-			$d = Loader::DATABASE.$d;
+			$d = self::DATABASE.$d;
 		}
 
 		$classes = array_merge($routing, $utils, $security, $database);
