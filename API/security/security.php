@@ -9,23 +9,7 @@ class Security {
 	private const SEPARATOR = ':';
 	private $_key = '';
 	private $_algo = 'sha256';
-/*
-	public static function generateToken($length = 128) {
-		return bin2hex(random_bytes($length));
-		
-		$token = '';
-     	$codeAlphabet = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
-	    $codeAlphabet.= 'abcdefghijklmnopqrstuvwxyz';
-	    $codeAlphabet.= '0123456789';
-	    $max = strlen($codeAlphabet);
 
-	    for ($i=0; $i < $length; $i++) {
-	        $token .= $codeAlphabet[random_int(0, $max-1)];
-	    }
-
-	    return $token;
-	}
-*/
 	public function __construct($keyLength = 256, $algo = 'sha256') {
 		//$this->_key 	= Security::generateToken($keyLength);
 		$this->_key 	= $this->generateToken($keyLength);
