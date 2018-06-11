@@ -1,0 +1,3 @@
+Put here the controllers to handle the requsts
+
+Controllers must extend Controller
