@@ -10,7 +10,7 @@ class Prova extends Controller {
 		echo "Classe Prova";
 	}
 
-	protected function action() {
+	public function action() {
 		$this->getAction()('');
 	}
 

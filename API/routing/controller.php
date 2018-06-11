@@ -6,9 +6,11 @@ abstract class Controller {
 
 	private $_params;
 	private $_action;
+
+	abstract public function action();
 	
 	public function __construct() {
-		echo '<br>Controller started.<br>';
+		// echo '<br>Controller started.<br>';
 	}
 
 	public function setParams($params) {
@@ -18,19 +20,18 @@ abstract class Controller {
 	public function getParams() {
 		return $this->_params;
 	}
-
+/*
 	public function init() {
 
 	}
-
+*/
 	public function setAction($action) {
 		// set the method to execute
 		$this->_action = $action;
 	}
 
-	abstract protected function action();
 
-	protected function getAction() {
+	public function getAction() {
 		return $this->_action;
 	}
 

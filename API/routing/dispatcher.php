@@ -6,7 +6,7 @@
 //define('BASE_CONTROLLER', 'Controller');
 
 class Dispatcher {
-    private const DEFAULT_CONTROLLER = 'controller';
+    private const DEFAULT_CONTROLLER = 'base_controller';
 
 	private $_rm; // RouteManager
 	private $_headers = array();

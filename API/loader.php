@@ -6,7 +6,9 @@ class Loader
 {
 
 	// Folders
-	private const ROUTING = 'routing';
+	private const ROUTING	= './API/routing';
+	private const SECURITY 	= './API/security';
+	private const DATABASE 	= './API/database'
 	/*
 	public static function register() {
 		spl_autoload_register(function($className) {
@@ -19,10 +21,11 @@ class Loader
 	public static function classmap() {
 		$routing = array(
 			'./API/utils/utils_functions.php',
-			'./API/route-manager/route_manager.php',
-			'./API/route-manager/route.php',
-			'./API/route-manager/dispatcher.php',
-			'./API/route-manager/controller.php'
+			ROUTING.'/route_manager.php',
+			ROUTING.'/route.php',
+			ROUTING.'/dispatcher.php',
+			ROUTING.'/controller.php',
+			ROUTING.'/base_controller.php'
 		);
 		$constants = array(
 			'./API/constants/cookies.php',
@@ -33,11 +36,11 @@ class Loader
 		);
 
 		$security = array(
-			'./API/security/security.php'
+			SECURITY.'/security.php'
 		);
 
 		$database = array(
-			'./API/db/db_adapter.php'
+			DATABASE.'/db_adapter.php'
 		);
 
 		$classes = array_merge($routing, $constants, $security, $database);
