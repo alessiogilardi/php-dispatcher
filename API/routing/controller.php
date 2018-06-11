@@ -5,9 +5,9 @@
 abstract class Controller {
 
 	private $_params;
-	private $_action;
+	private $_method;
 
-	abstract public function action();
+	abstract public function executeMethod();
 	
 	public function __construct() {
 		// echo '<br>Controller started.<br>';
@@ -25,14 +25,14 @@ abstract class Controller {
 
 	}
 */
-	public function setAction($action) {
+	public function setMethod($method) {
 		// set the method to execute
-		$this->_action = $action;
+		$this->_method = $method;
 	}
 
 
-	public function getAction() {
-		return $this->_action;
+	public function getMethod() {
+		return $this->_method;
 	}
 
 /*

@@ -6,10 +6,10 @@
 class BaseController extends Controller {
 	
 	public function __construct() {
-		# code...
+		parent::__construct();
 	}
 
-	public function action() {
+	public function executeMethod() {
 		$this->getAction()(null);
 	}
 }

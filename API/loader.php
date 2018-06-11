@@ -8,7 +8,8 @@ class Loader
 	// Folders
 	private const ROUTING	= './API/routing';
 	private const SECURITY 	= './API/security';
-	private const DATABASE 	= './API/database'
+	private const DATABASE 	= './API/database';
+	private const UTILS		= './API/utils';
 	/*
 	public static function register() {
 		spl_autoload_register(function($className) {
@@ -16,34 +17,48 @@ class Loader
 		});
 	}*/
 
+	public static function loadClass($classPath) {
+		require_once $classPath;
+	}
 
 
 	public static function classmap() {
+
+		// TODO: usa un ciclo per generare l'array
 		$routing = array(
-			'./API/utils/utils_functions.php',
-			ROUTING.'/route_manager.php',
-			ROUTING.'/route.php',
-			ROUTING.'/dispatcher.php',
-			ROUTING.'/controller.php',
-			ROUTING.'/base_controller.php'
+			'/route_manager.php',
+			'/route.php',
+			'/dispatcher.php',
+			'/controller.php',
+			'/base_controller.php'
 		);
-		$constants = array(
-			'./API/constants/cookies.php',
-			'./API/constants/database.php',
-			'./API/constants/error_codes.php',
-			'./API/constants/html_form.php',
-			'./API/constants/session.php'
+		$utils = array(
+			'/utils.php'
 		);
-
 		$security = array(
-			SECURITY.'/security.php'
+			'/security.php'
 		);
-
 		$database = array(
-			DATABASE.'/db_adapter.php'
+			'/db_adapter.php'
 		);
 
-		$classes = array_merge($routing, $constants, $security, $database);
+		foreach ($routing as &$r) {
+			$r = Loader::ROUTING.$r;
+		}
+
+		foreach ($utils as &$u) {
+			$u = Loader::UTILS.$u;
+		}
+
+		foreach ($security as &$s) {
+			$s = Loader::SECURITY.$s;
+		}
+
+		foreach ($database as &$d) {
+			$d = Loader::DATABASE.$d;
+		}
+
+		$classes = array_merge($routing, $utils, $security, $database);
 		foreach ($classes as $className) {
 			require_once $className;
 		}

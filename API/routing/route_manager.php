@@ -1,8 +1,7 @@
 <?php
 
 class RouteManager {
-	private $mRoute;
-
+	private $_route;
 
 	public static function getCurrentUri() {
         $basepath = implode('/', array_slice(explode('/', $_SERVER['SCRIPT_NAME']), 0, -1)) . '/';
@@ -14,7 +13,6 @@ class RouteManager {
     }
 
 	private static function generateCurrentRoute() {
-		//return new Route(getCurrentUri());
 		return new Route(RouteManager::getCurrentUri());
 	}
 
@@ -27,13 +25,13 @@ class RouteManager {
 	}
 
 	public function __construct() {
-		$this->mRoute = RouteManager::generateCurrentRoute();
-		//$this->mWebPage = RouteManager::generateWebPage();
+		$this->_route = RouteManager::generateCurrentRoute();
 	}
 
 	public function getRoute() {
-		return $this->mRoute;
+		return $this->_route;
 	}
+
 }
 
 ?>

@@ -7,16 +7,19 @@ class Prova extends Controller {
 	
 	function __construct() {
 		parent::__construct();
-		echo "Classe Prova";
+		//echo "Classe Prova";
 	}
 
-	public function action() {
-		$this->getAction()('');
+	public function executeMethod() {
+		$method = $this->getMethod();
+		$this->$method(); 
+
+		//$this->($this->getAction())();
 	}
 
-	private function print($data) {
-		echo "Prova della funzione print";
-		//var_dump($this->getParams());
+	private function print() {
+		//echo "Prova della funzione print";
+		var_dump($this->getParams());
 	}
 }
 

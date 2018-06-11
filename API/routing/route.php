@@ -7,16 +7,8 @@ class Route {
 	private $_controller = '';
 	private $_action = '';
 	private $_params = array('POST' => array(), 'GET' => array());
-/*
-	public static function buildFromRoute(Route $route) {
-		//$instance = new Route($route->getUri());
-		$instance = new Route();
-		$instance->clone($route);
-		return $instance;
-	}
-*/
+
 	public static function parseUri($aUri) {
-		//$route = BASE_ROUTE;
 		$temp = [];
 		$urlSegments = explode('/', $aUri);
 		if (count($urlSegments) > count(Route::SCHEME)) {
@@ -24,7 +16,6 @@ class Route {
 		}
 
 		foreach ($urlSegments as $index => $segment) {
-			//$route[Route::SCHEME[$index]] = $segment;
 			$temp += [Route::SCHEME[$index] => $segment];
 		}
 
@@ -43,6 +34,7 @@ class Route {
 		$this->_controller 	= $route['controller'];
 		$this->_action 		= isset($route['action'])?$route['action']:NULL;
 		$this->parseParams();
+		
 	}
 
 	public function getUri() {

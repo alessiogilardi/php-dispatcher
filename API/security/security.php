@@ -26,7 +26,7 @@ class Security {
 	    return $token;
 	}
 */
-	public function __construct($keyLength, $algo = 'sha256') {
+	public function __construct($keyLength = 256, $algo = 'sha256') {
 		//$this->_key 	= Security::generateToken($keyLength);
 		$this->_key 	= $this->generateToken($keyLength);
 		$this->_algo 	= $algo;

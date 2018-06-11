@@ -6,31 +6,26 @@
 //define('BASE_CONTROLLER', 'Controller');
 
 class Dispatcher {
-    private const DEFAULT_CONTROLLER = 'base_controller';
+    private const DEFAULT_CONTROLLER = 'base-controller';
 
 	private $_rm; // RouteManager
 	private $_headers = array();
 	//private $_controllerPath = .DIRECTORY_SEPARATOR.'controllers';
-    // !!!!!ATTENZIONE DA MODIFICARE!!!!!! Il percorso deve essere ricavato!!!!!!
     private $_controllerPath; /*= 'C:\\xampp\\htdocs\\login-system'.DIRECTORY_SEPARATOR.'controllers'; */
 	private $_delimiter = '-';
 
-	private function loadClass($classPath) {
-		require_once $classPath;
-	}
-	
 	public function getClassPath($controller) {
 		return $this->getControllerPath().DIRECTORY_SEPARATOR.str_replace($this->_delimiter, '_', $controller).'.php';
 	}
 
 	public function getClassName($controller) {
-        //echo "<br>".str_replace($this->_delimiter, '', ucwords($controller, $this->_delimiter))."<br>";
-		return str_replace($this->_delimiter, '', ucwords($controller, $this->_delimiter));
+        //echo Utils::toCamelCase($controller, $this->_delimiter).'<br';
+        return Utils::toCamelCase($controller, $this->_delimiter);
 	}
 
 	public function getMethodName($action) {
-        //echo "<br>".str_replace($this->_delimiter, '', lcfirst(ucwords($action, $this->_delimiter)))."<br>";
-		return str_replace($this->_delimiter, '', lcfirst(ucwords($action, $this->_delimiter))); // Va ritornata la action in camel case con la prima lettera minuscola
+        //echo Utils::toCamelCase($action, $this->_delimiter, false).'<br>';
+        return Utils::toCamelCase($action, $this->_delimiter, false);
 	}
 
 	public function __construct() {
@@ -72,19 +67,26 @@ class Dispatcher {
     		$classPath = $this->getClassPath(Dispatcher::DEFAULT_CONTROLLER);
     		$className = $this->getClassName(Dispatcher::DEFAULT_CONTROLLER);
     	} else {
-    		$this->loadClass($classPath);
+            Loader::loadClass($classPath);
     	}
 
     	$controller = new $className;
-    	if ($route->getAction() !== NULL) {
+
+
+        // TODO: Se non specifico un metodo posso chiamarne uno generico????
+    	if ($route->getAction() !== null) {
             $method = $this->getMethodName($route->getAction());
             if (!method_exists($controller, $method)) {
                 throw new RuntimeException('Page not found '.$classPath.'->'.$method, 404);
             }
-            $controller->setParams($route->getParams());
-	    	$controller->setAction($method);
-	    	return $controller;
+	    	$controller->setMethod($method);
+	    	//return $controller;
     	}
+        //var_dump($route->getParams());
+        //var_dump($route->getAction());
+        $controller->setParams($route->getParams());
+        var_dump($controller->getParams());
+        return $controller;
     }
 
 	public function sendHeaders() {
