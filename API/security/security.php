@@ -12,7 +12,7 @@ class Security {
 
 	public function __construct($keyLength = 256, $algo = 'sha256') {
 		//$this->_key 	= Security::generateToken($keyLength);
-		$this->_key 	= $this->generateToken($keyLength);
+		$this->_key 	= $this->generateAsciiToken($keyLength);
 		$this->_algo 	= $algo;
 	}
 
@@ -20,7 +20,7 @@ class Security {
 		return Security::MASTER_KEY;
 	}
 
-	public function generateToken($length) {
+	public function generateAsciiToken($length) {
 		return bin2hex(random_bytes($length));
 	}
 
@@ -44,7 +44,7 @@ class Security {
 		$algo 	= $this->getAlgo();
 		$key 	= $this->getKey();
 		$master = $this->getMasterKey();
-		return $value.Security::SEPARATOR.$algo.Security::SEPARATOR.hash_hmac($algo, $value, $key.$master);
+		return $value.self::SEPARATOR.$algo.self::SEPARATOR.hash_hmac($algo, $value, $key.$master);
 		//return $value.hash_hmac($algo, $value, $key.$master);
 	}
 
@@ -61,8 +61,8 @@ class Security {
 	}
 
 	private function extractData($signed) {
-		if (Security::isWellFormed($signed)) {
-			return array_fill_keys(array('value', 'algo', 'mac'), explode(Security::SEPARATOR, $signed));
+		if (self::isWellFormed($signed)) {
+			return array_fill_keys(array('value', 'algo', 'mac'), explode(self::SEPARATOR, $signed));
 		}
 		throw new RuntimeException("The signed value is badly formed", 1);
 	}

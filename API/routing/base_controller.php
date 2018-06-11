@@ -12,6 +12,10 @@ class BaseController extends Controller {
 	public function executeMethod() {
 		$this->getAction()(null);
 	}
+
+	public function defaultMethod($data = null) {
+		echo "Metodo generico di Base Controller";
+	}
 }
 
 ?>

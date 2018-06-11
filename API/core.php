@@ -13,9 +13,7 @@ class Core {
 		$dis->setRouteManager($rm);
 		$dis->setControllerPath(substr(__DIR__, 0, strpos(__DIR__, basename(__DIR__))).'controllers');
 		$this->setController($dis->dispatch());
-		if ($this->getController()->getMethod() != null) {
-			$this->getController()->executeMethod();
-		}
+		$this->getController()->executeMethod();
 	}
 
 	public function getController() {

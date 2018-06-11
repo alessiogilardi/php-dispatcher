@@ -5,16 +5,17 @@
  */
 class Prova extends Controller {
 	
-	function __construct() {
+	public function __construct() {
 		parent::__construct();
-		//echo "Classe Prova";
 	}
 
 	public function executeMethod() {
 		$method = $this->getMethod();
 		$this->$method(); 
+	}
 
-		//$this->($this->getAction())();
+	public function defaultMethod($data = null) {
+		echo "Metodo deafult di Prova";
 	}
 
 	private function print() {

@@ -3,11 +3,14 @@
  * 
  */
 abstract class Controller {
+	private const DEFAULT_METHOD = 'defaultMethod';
 
 	private $_params;
 	private $_method;
+	
 
 	abstract public function executeMethod();
+	abstract public function defaultMethod($data = null); // questo metodo viene chiamato sempre nel caso in cui non sia specificato alcun metodo ed è implementato dall'utente
 	
 	public function __construct() {
 		// echo '<br>Controller started.<br>';
@@ -33,6 +36,10 @@ abstract class Controller {
 
 	public function getMethod() {
 		return $this->_method;
+	}
+
+	public function setMethodToDefault() {
+		$this->setMethod(self::DEFAULT_METHOD);
 	}
 
 /*

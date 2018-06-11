@@ -82,7 +82,9 @@ class Dispatcher {
             }
 	    	$controller->setMethod($method);
 	    	//return $controller;
-    	}
+    	} else {
+            $controller->setMethodToDefault();
+        }
         //var_dump($route->getParams());
         //var_dump($route->getAction());
         $controller->setParams($route->getParams());

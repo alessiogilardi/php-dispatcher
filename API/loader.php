@@ -60,7 +60,8 @@ class Loader
 
 		$classes = array_merge($routing, $utils, $security, $database);
 		foreach ($classes as $className) {
-			require_once $className;
+			//require_once $className;
+			self::loadClass($className);
 		}
 	}
 }
