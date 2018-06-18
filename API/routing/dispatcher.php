@@ -1,19 +1,31 @@
 <?php
 /**
- * Il Dispatcher deve solo occuparsi di fornire il file controller con i vari controlli del caso, il file si occuperà di eseguire i comandi * giusti
+ * Dispatcher è una classe che si occupa di fornire all'utente il controller richiesto nell'URI
+ * 
+ * Se il controller richiesto non viene trovato prova a eseguire la richiesta con il controller di default => base-controller.php
  */
-//define('DIRECTORY_SEPARATOR', '/');
-//define('BASE_CONTROLLER', 'Controller');
 
 class Dispatcher {
+	/**
+	 * Controller di default usato nel caso il controller richiesto non sia trovato
+	 */
     private const DEFAULT_CONTROLLER = 'base-controller';
 
+    /**
+     * RouteManager
+     */
 	private $_rm; // RouteManager
 	private $_headers = array();
-	//private $_controllerPath = .DIRECTORY_SEPARATOR.'controllers';
     private $_controllerPath; /*= 'C:\\xampp\\htdocs\\login-system'.DIRECTORY_SEPARATOR.'controllers'; */
 	private $_delimiter = '-';
 
+	/**
+	 * Restituisce il percorso del file del controller richiesto
+	 * 
+	 * @param String $controller Controller di cui recuperare il percorso
+	 *
+	 * @return String Il percorso del file 
+	 */
 	public function getClassPath($controller) {
 		return $this->getControllerPath().DIRECTORY_SEPARATOR.str_replace($this->_delimiter, '_', $controller).'.php';
 	}
